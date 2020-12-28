@@ -1,5 +1,5 @@
-# imaHEX
-HEX is a program that allow you to modify the hex colors of your files in an easy and intuitive way using images.
+# ImaHEX
+ImaHEX is a program that allow you to modify the hex colors of your files in an easy and intuitive way using images.
 
 ## How does it work?
 imaHEX will ask you to enter your file's location. Then it will create a two pixels-wide image containing all the colors in that file:
