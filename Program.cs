@@ -12,8 +12,9 @@ namespace imaHEX{
 		}
 		
 		static void replace(string file){
-			Console.WriteLine("Enter Image Location:");
-			string img = Console.ReadLine().Replace("'", "").Trim().Replace(@"\", "");
+			Console.WriteLine("Press a key to End");
+			Console.ReadLine();
+			string img = "image.png";
 			Bitmap bitmap = new Bitmap(Image.FromFile(img));
 			string[] hexValues = new string[bitmap.Height*bitmap.Width];
 
@@ -39,10 +40,15 @@ namespace imaHEX{
 			lines = File.ReadAllLines(file);
 			for(int i = 0; i < lines.Length; i++){
 				if(lines[i].Contains('#')){
-					string hex = lines[i].Substring(lines[i].IndexOf('#'), 7).ToLower();
-					if(isHex(hex)){
-						push(ref colors, hex);
+					try{
+						string hex = lines[i].Substring(lines[i].IndexOf('#'), 7).ToLower();
+						if(isHex(hex)){
+							push(ref colors, hex);
+						}
+					}catch{
+						Console.WriteLine("We don't use 3-digit hex");
 					}
+					
 				}
 			}
 
