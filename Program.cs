@@ -93,12 +93,12 @@ namespace imaHEX{
 
 		static void createImage(string[] hexValues){
 			Bitmap bitmap = new Bitmap(2, hexValues.Length);
-				for (var x = 0; x < bitmap.Width; x++){
-					for (var y = 0; y < bitmap.Height; y++){
-						bitmap.SetPixel(x, y, System.Drawing.ColorTranslator.FromHtml(hexValues[y]));
-					}
+			for (var x = 0; x < bitmap.Width; x++){
+				for (var y = 0; y < bitmap.Height; y++){
+					bitmap.SetPixel(x, y, System.Drawing.ColorTranslator.FromHtml(hexValues[y]));
 				}
-				bitmap.Save("image.png");		
+			}
+			bitmap.Save("image.png");		
 		}
 	}
 }
