@@ -3,8 +3,8 @@ using System.IO;
 using System.Drawing;
 
 namespace imaHEX{
-    class Program{
-        static void Main(string[] args){
+	class Program{
+		static void Main(string[] args){
 			Console.WriteLine("Enter File Location:");
 			string file = Console.ReadLine();
 			createImage(getColors(file));
@@ -53,7 +53,7 @@ namespace imaHEX{
 				}
 			}
 			colors = resize(colors);
-	    	return colors;
+			return colors;
 		}
 		
 		static bool isHex(string str){
@@ -88,7 +88,7 @@ namespace imaHEX{
 		}
 
 		private static String HexConverter(System.Drawing.Color c){
-	    	return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+			return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
 		}
 
 		static void createImage(string[] hexValues){
@@ -100,5 +100,5 @@ namespace imaHEX{
 				}
 				bitmap.Save("image.png");		
 		}
-    }
+	}
 }
