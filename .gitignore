@@ -1,0 +1,8 @@
+.vscode/
+bin/
+obj/
+Content/bin
+Content/obj
+**/bin/
+**/obj/
+**.user
