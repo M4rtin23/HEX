@@ -6,14 +6,14 @@ namespace imaHEX{
 	class Program{
 		static void Main(string[] args){
 			Console.WriteLine("Enter File Location:");
-			string file = Console.ReadLine().Replace("'", "").Trim();
+			string file = Console.ReadLine().Replace("'", "").Trim().Replace(@"\", "");
 			createImage(getColors(file));
 			replace(file);
 		}
 		
 		static void replace(string file){
 			Console.WriteLine("Enter Image Location:");
-			string img = Console.ReadLine().Replace("'", "").Trim();
+			string img = Console.ReadLine().Replace("'", "").Trim().Replace(@"\", "");
 			Bitmap bitmap = new Bitmap(Image.FromFile(img));
 			string[] hexValues = new string[bitmap.Height*bitmap.Width];
 
