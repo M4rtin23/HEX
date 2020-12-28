@@ -2,7 +2,7 @@
 using System.IO;
 using System.Drawing;
 
-namespace HEX{
+namespace imaHEX{
     class Program{
         static void Main(string[] args){
 			Console.WriteLine("Enter File Location:");
