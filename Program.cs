@@ -5,62 +5,38 @@ using System.Drawing;
 namespace HEX{
     class Program{
         static void Main(string[] args){
+			Console.WriteLine("Enter File Location:");
+			string file = Console.ReadLine();
+			createImage(getColors(file));
+			replace(file);
+		}
+		
+		static void replace(string file){
 			Console.WriteLine("Enter Image Location:");
 			string img = Console.ReadLine();
 			Bitmap bitmap = new Bitmap(Image.FromFile(img));
-
-			Console.WriteLine("Enter File Location:");
-			string file = Console.ReadLine();
-
 			string[] hexValues = new string[bitmap.Height*bitmap.Width];
-
-
-			
 
 			for (var x = 0; x < bitmap.Width; x++){
 				for (var y = 0; y < bitmap.Height; y++){
 					hexValues[y+x*(hexValues.Length/2)] = HexConverter(bitmap.GetPixel(x, y));
 				}
 			}
-			for(int i = 0; i < bitmap.Height; i++){
-				Console.WriteLine(hexValues[i] +"----"+hexValues[i + bitmap.Height]);
-			}
 			StreamReader reader = new StreamReader(File.OpenRead(file));
-
 			string fileContent = reader.ReadToEnd();
-
 			reader.Close();
-
 			for(int i = 0; i < bitmap.Height; i++){
 				fileContent = fileContent.Replace(hexValues[i], hexValues[i + bitmap.Height], StringComparison.InvariantCultureIgnoreCase);
-
 			}
-
 			StreamWriter writer =new StreamWriter(File.OpenWrite(file));
-
 			writer.Write(fileContent);
-
 			writer.Close();
-			//create();
 		}
-		
-		
-		
-		static void create(){
-			Console.WriteLine("Enter File Location:");
-			string file = Console.ReadLine();			
-			string[] hexValues = getColors(file);
-			
-			/*for(int i = 0; i < hexValues.Length; i++){
-				Console.WriteLine(hexValues[i]);
-			}*/
-			createImage(hexValues);
-        
-		}
-		static string[] getColors(string dir){
+
+		static string[] getColors(string file){
 			string[] lines;
 			string[] colors = new string[0];
-			lines = File.ReadAllLines(dir);
+			lines = File.ReadAllLines(file);
 			for(int i = 0; i < lines.Length; i++){
 				if(lines[i].Contains('#')){
 					string hex = lines[i].Substring(lines[i].IndexOf('#'), 7).ToLower();
@@ -95,10 +71,12 @@ namespace HEX{
 			}
 			return (num == 6);
 		}
+
 		static void push(ref string[] str, string value){
 			Array.Resize(ref str, str.Length+1);
 			str[str.Length-1] = value;
 		}
+
 		static string[] resize(string[] str){
 			string[] result = new string[0];
 			for(int i = 0; i < str.Length; i++){
@@ -108,9 +86,11 @@ namespace HEX{
 			}
 			return result;
 		}
+
 		private static String HexConverter(System.Drawing.Color c){
 	    	return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
 		}
+
 		static void createImage(string[] hexValues){
 			Bitmap bitmap = new Bitmap(2, hexValues.Length);
 				for (var x = 0; x < bitmap.Width; x++){
@@ -120,6 +100,5 @@ namespace HEX{
 				}
 				bitmap.Save("image.png");		
 		}
-
     }
 }
