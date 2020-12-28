@@ -5,14 +5,19 @@ using System.Drawing;
 namespace imaHEX{
 	class Program{
 		static void Main(string[] args){
-			Console.WriteLine("Enter File Location:");
-			string file = Console.ReadLine().Replace("'", "").Trim().Replace(@"\", "");
+			string file;
+			if(args.Length == 0){
+				Console.WriteLine("Enter File Location:");
+				file = Console.ReadLine().Replace("'", "").Trim().Replace(@"\", "");
+			}else{
+				file = args[0].Replace("'", "").Trim().Replace(@"\", "");
+			}
 			createImage(getColors(file));
 			replace(file);
 		}
 		
 		static void replace(string file){
-			Console.WriteLine("Press a key to End");
+			Console.WriteLine("Press enter to End");
 			Console.ReadLine();
 			string img = "image.png";
 			Bitmap bitmap = new Bitmap(Image.FromFile(img));
