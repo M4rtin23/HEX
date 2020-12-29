@@ -2,14 +2,18 @@ using System;
 
 namespace ImaHex{
 	class Commands{
-		static char[] options = {'h'};
-		static Action[] actions = {help};
-		public static void GetArgs(string[] args, ref string file){
+		static char[] options = {'h', 'r'};
+		static Action[] actions = {help, remove};
+		static bool delete = false;
+		public static void GetArgs(string[] args, ref string file, ref bool delete){
 			for(int i = 0; i < args.Length; i++){
 				if(args[i].StartsWith('-')){
-					if(args[i].Contains(options[0])){
-						actions[0]();
+					for(int o = 0; o < options.Length; o++){
+						if(args[i].Contains(options[o])){
+							actions[o]();
+						}
 					}
+					delete = Commands.delete;
 				}else{
 					file = args[i].Replace("'", "").Trim().Replace(@"\", "");
 				}
@@ -19,9 +23,13 @@ namespace ImaHex{
 		static void help(){
 				Console.WriteLine(
 @"Usage: imahex [arguments] [path-to-file]
-Options:
-  -h:		Show help"
+Options:s
+  -h:		Show help
+  -r:		Revome image at the end of the process"
   				);
+		}
+		static void remove(){
+			delete = true;	
 		}
 	}
 }

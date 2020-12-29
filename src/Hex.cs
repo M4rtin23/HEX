@@ -5,20 +5,25 @@ using System.Drawing;
 namespace ImaHex{
 	static class Hex{
 		public static void CreateImage(string[] hexValues){
-			Bitmap bitmap = new Bitmap(2, hexValues.Length);
-			for (var x = 0; x < bitmap.Width; x++){
-				for (var y = 0; y < bitmap.Height; y++){
-					bitmap.SetPixel(x, y, System.Drawing.ColorTranslator.FromHtml(hexValues[y]));
+			if(hexValues.Length > 0){
+				Bitmap bitmap = new Bitmap(2, hexValues.Length);
+				for (var x = 0; x < bitmap.Width; x++){
+					for (var y = 0; y < bitmap.Height; y++){
+						bitmap.SetPixel(x, y, System.Drawing.ColorTranslator.FromHtml(hexValues[y]));
+					}
 				}
+				bitmap.Save("image.png");		
 			}
-			bitmap.Save("image.png");		
 		}
 
-		public static void Replace(string file){
+		public static void Replace(string file, bool delete){
 			Console.WriteLine("Press enter to End");
 			Console.ReadLine();
 			string img = "image.png";
 			Bitmap bitmap = new Bitmap(Image.FromFile(img));
+			if(delete){
+				File.Delete(img);
+			}
 			string[] hexValues = new string[bitmap.Height*bitmap.Width];
 
 			for (var x = 0; x < bitmap.Width; x++){

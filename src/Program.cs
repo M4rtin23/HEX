@@ -2,13 +2,12 @@
 	class Program{
 		static void Main(string[] args){
 			string file ="";
-			Commands.GetArgs(args, ref file);
-			if(file == ""){
-				System.Console.WriteLine("Enter File Location:");
-				file = System.Console.ReadLine().Replace("'", "").Trim().Replace(@"\", "");
+			bool delete = false;
+			Commands.GetArgs(args, ref file, ref delete);
+			if(file != ""){
+				Hex.CreateImage(Hex.GetHexValues(file));
+				Hex.Replace(file, delete);
 			}
-			Hex.CreateImage(Hex.GetHexValues(file));
-			Hex.Replace(file);
 		}
 	}
 }
