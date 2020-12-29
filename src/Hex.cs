@@ -17,8 +17,6 @@ namespace ImaHex{
 		}
 
 		public static void Replace(string file, bool delete){
-			Console.WriteLine("Press enter to End");
-			Console.ReadLine();
 			string img = "image.png";
 			Bitmap bitmap = new Bitmap(Image.FromFile(img));
 			if(delete){
