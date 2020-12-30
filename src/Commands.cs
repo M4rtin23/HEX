@@ -4,7 +4,7 @@ namespace ImaHex{
 	class Commands{
 		static char[] options = {'h', 'd', 'k'};
 		static Action[] actions = {help, remove, keep};
-		static bool delete = false;
+		static bool delete = true;
 		public static void GetArgs(string[] args, ref string file, ref bool delete){
 			for(int i = 0; i < args.Length; i++){
 				if(args[i].StartsWith('-')){
@@ -14,6 +14,9 @@ namespace ImaHex{
 						}
 					}
 					delete = Commands.delete;
+					if(args[i].Contains('l')){
+						later(ref file);
+					}
 				}else{
 					file = args[i].Replace("'", "").Trim().Replace(@"\", "");
 				}
@@ -25,8 +28,9 @@ namespace ImaHex{
 @"Usage: imahex [arguments] [path-to-file]
 Options:s
   -h:		Show help
-  -d:		Revome image at the end of the process
-  -k:		Keep image"
+  -d:		Delete image at the end of the process (default)
+  -k:		Keep image
+  -l:		Asks for the path after the command is executed"
   				);
 		}
 		static void remove(){
@@ -34,6 +38,10 @@ Options:s
 		}
 		static void keep(){
 			delete = false;
+		}
+		static void later(ref string file){
+			Console.WriteLine("Enter File Location:");
+			file = Console.ReadLine().Replace("'", "").Trim().Replace(@"\", "");
 		}
 	}
 }
