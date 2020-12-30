@@ -3,6 +3,7 @@ Version: 1.2
 Section: base 
 Priority: optional 
 Architecture: amd64
+Depends: libgdiplus
 Maintainer: martunico23@hotmail.com 
 Description: ImaHEX is a program that allow you to modify the hex colors of your files in an easy and intuitive way using images.
 

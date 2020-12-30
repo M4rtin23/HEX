@@ -13,7 +13,6 @@ namespace ImaHex{
 							actions[o]();
 						}
 					}
-					delete = Commands.delete;
 					if(args[i].Contains('l')){
 						later(ref file);
 					}
@@ -21,6 +20,7 @@ namespace ImaHex{
 					file = args[i].Replace("'", "").Trim().Replace(@"\", "");
 				}
 			}
+			delete = Commands.delete;
 		}
 		
 		static void help(){
@@ -29,7 +29,7 @@ namespace ImaHex{
 Options:s
   -h:		Show help
   -d:		Delete image at the end of the process (default)
-  -k:		Keep image
+  -k:		Keep edited image
   -l:		Asks for the path after the command is executed"
   				);
 		}
