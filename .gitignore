@@ -6,3 +6,5 @@ Content/obj
 **/bin/
 **/obj/
 **.user
+**.deb
+!**/usr/bin
