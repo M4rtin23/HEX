@@ -2,8 +2,8 @@ using System;
 
 namespace ImaHex{
 	class Commands{
-		static char[] options = {'h', 'r'};
-		static Action[] actions = {help, remove};
+		static char[] options = {'h', 'd', 'k'};
+		static Action[] actions = {help, remove, keep};
 		static bool delete = false;
 		public static void GetArgs(string[] args, ref string file, ref bool delete){
 			for(int i = 0; i < args.Length; i++){
@@ -25,11 +25,15 @@ namespace ImaHex{
 @"Usage: imahex [arguments] [path-to-file]
 Options:s
   -h:		Show help
-  -r:		Revome image at the end of the process"
+  -d:		Revome image at the end of the process
+  -k:		Keep image"
   				);
 		}
 		static void remove(){
 			delete = true;	
+		}
+		static void keep(){
+			delete = false;
 		}
 	}
 }
