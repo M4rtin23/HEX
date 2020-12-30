@@ -2,7 +2,7 @@ using System;
 
 namespace ImaHex{
 	class Commands{
-		static char[] options = {'h', 'd', 'v', 'k'};
+		static char[] options = {'ñ', 'd', 'v', 'k'};
 		static string[] optionsLarge = {"help", "delete","version"};
 		static Action[] actions = {help, remove, version, keep};
 		static bool delete = true;
@@ -34,11 +34,11 @@ namespace ImaHex{
 				Console.WriteLine(
 @"Usage: imahex [arguments] [path-to-file]
 Options:
-  -d, --delete		Delete image at the end of the process (default)
-  -h, --help		Show help
+  -d, --delete			Delete image at the end of the process (default)
+  -h, --help			Show help
   -k				Keep edited image
   -l				Ask for the path after the command is executed
-  -v, --version		Show ImaHEX version"
+  -v, --version			Show ImaHEX version"
   				);
 		}
 		static void remove(){
