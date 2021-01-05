@@ -3,8 +3,6 @@
 		static void Main(string[] args){
 			string[] files = new string[0];
 			bool delete = false;
-			bool newImage = false;
-			bool[] conditions;
 
 			Commands.GetArgs(args, ref files, ref delete);
 			
@@ -28,9 +26,6 @@
 				}
 				if(delete){
 					System.IO.File.Delete("image.png");
-				}
-				if(newImage){
-					
 				}
 			}
 		}

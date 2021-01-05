@@ -52,7 +52,7 @@ Options:
 			file[0] = Console.ReadLine().Replace("'", "").Trim().Replace(@"\", "");
 		}
 		static void version(){
-			Console.WriteLine("ImaHEX v1.2.2");
+			Console.WriteLine("ImaHEX v1.3");
 		}
 	}
 }
