@@ -16,12 +16,10 @@ namespace ImaHex{
 			}
 		}
 
-		public static void Replace(string file, bool delete){
+		public static void Replace(string file){
 			string img = "image.png";
 			Bitmap bitmap = new Bitmap(Image.FromFile(img));
-			if(delete){
-				File.Delete(img);
-			}
+
 			string[] hexValues = new string[bitmap.Height*bitmap.Width];
 
 			for (var x = 0; x < bitmap.Width; x++){
@@ -57,12 +55,7 @@ namespace ImaHex{
 					
 				}
 			}
-			Array.Sort(colors, StringComparer.InvariantCultureIgnoreCase);
-			for(int i = 0; i < colors.Length-1; i++){
-				if(colors[i] == colors[i+1]){
-					colors[i] = "";
-				}
-			}
+			removeDuplicate(ref colors);
 			colors = ExtendedArray.Resize(colors);
 			return colors;
 		}
@@ -75,6 +68,10 @@ namespace ImaHex{
 					ExtendedArray.Push(ref colors, hexConverter(bitmap.GetPixel(x, y)));
 				}
 			}
+			removeDuplicate(ref colors);
+			return colors;
+		}
+		public static void removeDuplicate(ref string[] colors){
 			Array.Sort(colors, StringComparer.InvariantCultureIgnoreCase);
 			for(int i = 0; i < colors.Length-1; i++){
 				if(colors[i] == colors[i+1]){
@@ -82,7 +79,6 @@ namespace ImaHex{
 				}
 			}
 			colors = ExtendedArray.Resize(colors);
-			return colors;
 		}
 
 		public static bool isHex(string str){

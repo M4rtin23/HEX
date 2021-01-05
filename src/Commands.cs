@@ -2,11 +2,11 @@ using System;
 
 namespace ImaHex{
 	class Commands{
-		static char[] options = {'ñ', 'd', 'v', 'k'};
-		static string[] optionsLarge = {"help", "delete","version"};
+		static char[] options = {'h', 'd', 'v', 'k'};
+		static string[] optionsLarge = {"help", "delete","version", "keep"};
 		static Action[] actions = {help, remove, version, keep};
 		static bool delete = true;
-		public static void GetArgs(string[] args, ref string file, ref bool delete){
+		public static void GetArgs(string[] args, ref string[] files, ref bool delete){
 			for(int i = 0; i < args.Length; i++){
 				if(args[i].StartsWith("--")){
 					for(int o = 0; o < optionsLarge.Length; o++){
@@ -21,10 +21,10 @@ namespace ImaHex{
 						}
 					}
 					if(args[i].Contains('l')){
-						later(ref file);
+						later(ref files);
 					}
 				}else{
-					file = args[i].Replace("'", "").Trim().Replace(@"\", "");
+					ExtendedArray.Push(ref files, args[i].Replace("'", "").Trim().Replace(@"\", ""));
 				}
 			}
 			delete = Commands.delete;
@@ -36,7 +36,7 @@ namespace ImaHex{
 Options:
   -d, --delete			Delete image at the end of the process (default)
   -h, --help			Show help
-  -k				Keep edited image
+  -k, --keep			Keep edited image
   -l				Ask for the path after the command is executed
   -v, --version			Show ImaHEX version"
   				);
@@ -47,9 +47,9 @@ Options:
 		static void keep(){
 			delete = false;
 		}
-		static void later(ref string file){
+		static void later(ref string[] file){
 			Console.WriteLine("Enter File Location:");
-			file = Console.ReadLine().Replace("'", "").Trim().Replace(@"\", "");
+			file[0] = Console.ReadLine().Replace("'", "").Trim().Replace(@"\", "");
 		}
 		static void version(){
 			Console.WriteLine("ImaHEX v1.2.2");
