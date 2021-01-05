@@ -66,6 +66,24 @@ namespace ImaHex{
 			colors = ExtendedArray.Resize(colors);
 			return colors;
 		}
+		public static string[] GetImageValues(string file){
+			string[] colors = new string[0];
+
+			Bitmap bitmap = new Bitmap(Image.FromFile(file));
+			for(int x = 0; x < bitmap.Width; x++){
+				for(int y = 0; y < bitmap.Height; y++){
+					ExtendedArray.Push(ref colors, hexConverter(bitmap.GetPixel(x, y)));
+				}
+			}
+			Array.Sort(colors, StringComparer.InvariantCultureIgnoreCase);
+			for(int i = 0; i < colors.Length-1; i++){
+				if(colors[i] == colors[i+1]){
+					colors[i] = "";
+				}
+			}
+			colors = ExtendedArray.Resize(colors);
+			return colors;
+		}
 
 		public static bool isHex(string str){
 			char[] charHex = str.ToCharArray();
